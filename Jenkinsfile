@@ -4,33 +4,24 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Reagan-m/calculator-app.git'
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'npm run build || echo "No build step"'
+                git url: 'https://github.com/Reagan-m/calculator-app.git'
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t simple-calc-app .'
+                sh 'docker build -t calculator-app .'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker run -d --name simple-calc -p 6000:6000 simple-calc-app'
+                sh '''
+                docker rm -f calculator-app || true
+                docker run -d --name calculator-app -p 8080:6000 calculator-app
+                '''
             }
         }
     }
 }
+
