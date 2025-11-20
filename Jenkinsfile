@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/Reagan-m/simple-calc.git'
+                    url: 'https://github.com/Reagan-m/calculator-app.git'
             }
         }
 
