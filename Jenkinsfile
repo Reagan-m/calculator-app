@@ -17,11 +17,10 @@ pipeline {
         stage('Run Container') {
             steps {
                 sh '''
-                docker rm -f calculator-app || true
-                docker run -d --name calculator-app -p 8080:6000 calculator-app
-                '''
-            }
-        }
+                    docker rm -f calculator-app || true
+                    docker run -d --name calculator-app -p 3000:6000 calculator-app
+                   '''
     }
 }
+
 
