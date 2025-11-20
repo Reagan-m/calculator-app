@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Clone Repo') {
             steps {
                 git branch: 'main', url: 'https://github.com/Reagan-m/calculator-app.git'
@@ -10,7 +11,9 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t calculator-app .'
+                sh '''
+                    docker build -t calculator-app .
+                '''
             }
         }
 
@@ -19,8 +22,8 @@ pipeline {
                 sh '''
                     docker rm -f calculator-app || true
                     docker run -d --name calculator-app -p 3000:6000 calculator-app
-                   '''
+                '''
+            }
+        }
     }
 }
-
-
